@@ -110,7 +110,7 @@ export const Board: React.FC<BoardProps> = ({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
-      className="relative w-full flex-1 min-h-[360px] md:min-h-[460px] rounded-2xl bg-gradient-to-b from-[#1b3a2f] via-[#152e25] to-[#0e211a] border border-emerald-900/60 shadow-inner overflow-hidden select-none touch-none"
+      className="relative w-full flex-1 min-h-[360px] md:min-h-[460px] rounded-2xl bg-gradient-to-b from-[#1b3a2f] via-[#152e25] to-[#0e211a] border border-emerald-900/60 shadow-inner overflow-hidden select-none touch-none isolate z-0"
     >
       {/* Felt Texture & Radial Table Light */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-800/25 via-transparent to-black/60 pointer-events-none" />

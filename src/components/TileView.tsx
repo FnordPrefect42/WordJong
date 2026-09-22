@@ -55,7 +55,7 @@ export const TileView: React.FC<TileViewProps> = ({
         height: `${height}px`,
         zIndex,
       }}
-      title={`Tile ${tile.letter} (${tile.points} pts) - ${isFree ? 'Free to play' : 'Blocked'}`}
+      title={`Tile ${tile.letter} - ${isFree ? 'Free to play' : 'Blocked'}`}
     >
       {/* 3D Tile Shadow */}
       <div
@@ -87,7 +87,7 @@ export const TileView: React.FC<TileViewProps> = ({
             : 'inset 0 1px 2px rgba(0,0,0,0.2)',
         }}
       >
-        {/* Scrabble Letter */}
+        {/* Letter */}
         <span
           className={`font-black tracking-tight leading-none ${
             isFree ? 'text-stone-900' : 'text-stone-500'
@@ -98,16 +98,6 @@ export const TileView: React.FC<TileViewProps> = ({
           }}
         >
           {tile.letter}
-        </span>
-
-        {/* Scrabble Letter Value (subscript) */}
-        <span
-          className={`absolute bottom-1 right-1.5 text-[9px] font-bold leading-none ${
-            isFree ? 'text-stone-500' : 'text-stone-400'
-          }`}
-          style={{ fontSize: `${Math.max(8, unitSize * 0.24)}px` }}
-        >
-          {tile.points}
         </span>
 
         {/* Lock Overlay Icon if tile is blocked */}

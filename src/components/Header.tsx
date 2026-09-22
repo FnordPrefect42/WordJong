@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div>
             <h1 className="text-base font-black tracking-tight text-stone-100 flex items-center gap-1.5 leading-none">
-              Word Mahjong
+              WordJong
               <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
                 Daily
               </span>

@@ -1,6 +1,6 @@
 {
-  "name": "Word Mahjong Solitaire",
-  "description": "Daily puzzle game combining Mahjong solitaire tile stacking with Scrabble-style word building and offline play.",
+  "name": "WordJong",
+  "description": "Daily puzzle game combining Mahjong solitaire tile stacking with word building and offline play.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

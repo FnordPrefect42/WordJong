@@ -24,7 +24,7 @@ export const WinModal: React.FC<WinModalProps> = ({
   if (!isOpen) return null;
 
   const handleShare = () => {
-    const text = `🀄 Word Mahjong Solitaire (${dateKey})\nCleared all 72 tiles!\n🏆 Score: ${score} pts\n📖 Words: ${submittedWords.length}\nPlay: ${window.location.href}`;
+    const text = `🀄 WordJong (${dateKey})\nCleared all 72 tiles!\n🏆 Score: ${score} pts\n📖 Words: ${submittedWords.length}\nPlay: ${window.location.href}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -33,7 +33,7 @@ export const WinModal: React.FC<WinModalProps> = ({
   return (
     <div
       id="win-modal"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in"
     >
       <div className="w-full max-w-md bg-stone-900 border border-amber-500/40 rounded-3xl p-6 text-stone-200 shadow-2xl text-center relative overflow-hidden">
         {/* Glow backdrop */}

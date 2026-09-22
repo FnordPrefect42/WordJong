@@ -149,9 +149,6 @@ export const WordTray: React.FC<WordTrayProps> = ({
                 title="Tap to return this letter"
               >
                 <span className="text-lg sm:text-xl font-black leading-none">{tile.letter}</span>
-                <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[7px] sm:text-[8px] font-bold text-stone-500">
-                  {tile.points}
-                </span>
                 <span className="absolute -top-1 -right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-stone-700 text-stone-200 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <X className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
                 </span>
