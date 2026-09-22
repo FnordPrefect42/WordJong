@@ -293,7 +293,7 @@ export default function App() {
   }, [tiles, freeTileIdsAtTurnStart, showToast]);
 
   return (
-    <div className="min-h-screen bg-[#0d1612] text-stone-100 flex flex-col justify-between p-2 sm:p-4 select-none">
+    <div className="min-h-screen bg-[#0d1612] text-stone-100 flex flex-col p-2 sm:p-4 select-none">
       {/* Top Header & Stats */}
       <Header
         dateKey={dateKey}
@@ -308,8 +308,19 @@ export default function App() {
         onOpenStats={() => setIsStatsOpen(true)}
       />
 
+      {/* Word Tray (Placed prominently above the tiles for immediate visibility on mobile & desktop) */}
+      <section className="w-full max-w-3xl mx-auto my-1.5 sm:my-2 shrink-0 z-20">
+        <WordTray
+          selectedTiles={selectedTiles}
+          onRemoveTile={handleRemoveTileFromTray}
+          onSubmitWord={handleSubmitWord}
+          onClearTray={handleClearTray}
+          errorMessage={toastMessage}
+        />
+      </section>
+
       {/* Main Mahjong Solitaire Board */}
-      <main className="w-full max-w-5xl mx-auto flex-1 flex flex-col my-2 sm:my-3">
+      <main className="w-full max-w-5xl mx-auto flex-1 flex flex-col my-1 sm:my-2 min-h-0">
         <Board
           tiles={tiles}
           freeTileIds={freeTileIdsAtTurnStart}
@@ -318,17 +329,6 @@ export default function App() {
           onTileClick={handleTileClick}
         />
       </main>
-
-      {/* Bottom Word Tray with Option B Swipe Controls */}
-      <footer className="w-full">
-        <WordTray
-          selectedTiles={selectedTiles}
-          onRemoveTile={handleRemoveTileFromTray}
-          onSubmitWord={handleSubmitWord}
-          onClearTray={handleClearTray}
-          errorMessage={toastMessage}
-        />
-      </footer>
 
       {/* Modals */}
       <RulesModal isOpen={isRulesOpen} onClose={() => setIsRulesOpen(false)} />
