@@ -129,14 +129,14 @@ export function calculateWordPoints(word: string): number {
 /**
  * Finds a valid word that can be formed from the free tiles to power the Hint system.
  * Returns the matching tile IDs (without revealing the word itself).
+ * Prefers familiar, common words first so hints are pleasant and natural.
  */
 export function findHintTileIds(freeTiles: MahjongTile[]): { tileIds: string[]; word: string } | null {
   if (freeTiles.length < 4) return null;
 
-  // Map available letters to their tile IDs
-  const availableTiles = [...freeTiles];
+  // Map available letters to their tile IDs and track counts
   const letterMap = new Map<string, MahjongTile[]>();
-  for (const tile of availableTiles) {
+  for (const tile of freeTiles) {
     const l = tile.letter.toUpperCase();
     if (!letterMap.has(l)) letterMap.set(l, []);
     letterMap.get(l)!.push(tile);
@@ -144,17 +144,34 @@ export function findHintTileIds(freeTiles: MahjongTile[]): { tileIds: string[]; 
 
   const dictionary = getDictionaryWords();
 
-  // Sort dictionary candidate words: prioritize shorter words first (4-5 letters) so hint is accessible
-  const candidates = dictionary
-    .filter((w) => w.length >= 4 && w.length <= Math.min(8, freeTiles.length))
-    .sort((a, b) => a.length - b.length || Math.random() - 0.5);
+  // Filter dictionary: length between 4 and min(7, freeTiles.length)
+  // and all characters must exist in the letterMap
+  const maxLen = Math.min(7, freeTiles.length);
+  const eligibleWords: string[] = [];
 
-  for (const word of candidates) {
-    const wordLetters = word.split('');
+  for (const word of dictionary) {
+    if (word.length < 4 || word.length > maxLen) continue;
+    let allCharsPresent = true;
+    for (let i = 0; i < word.length; i++) {
+      if (!letterMap.has(word[i])) {
+        allCharsPresent = false;
+        break;
+      }
+    }
+    if (allCharsPresent) {
+      eligibleWords.push(word);
+    }
+  }
+
+  // Shuffle slightly or sort by length (prefer 4-5 letter accessible words)
+  eligibleWords.sort((a, b) => a.length - b.length);
+
+  for (const word of eligibleWords) {
     const usedCounts = new Map<string, number>();
     let canForm = true;
 
-    for (const char of wordLetters) {
+    for (let i = 0; i < word.length; i++) {
+      const char = word[i];
       const current = usedCounts.get(char) || 0;
       const available = letterMap.get(char)?.length || 0;
       if (current + 1 > available) {
@@ -168,7 +185,8 @@ export function findHintTileIds(freeTiles: MahjongTile[]): { tileIds: string[]; 
       // Collect the specific tile IDs used
       const chosenTileIds: string[] = [];
       const tracker = new Map<string, number>();
-      for (const char of wordLetters) {
+      for (let i = 0; i < word.length; i++) {
+        const char = word[i];
         const idx = tracker.get(char) || 0;
         const tile = letterMap.get(char)![idx];
         chosenTileIds.push(tile.id);
